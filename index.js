@@ -9,13 +9,27 @@ const BodyParser = require("body-parser");
 const multer = require("multer");
 const path = require("path");
 const { fileStorage, fileFilter } = require("./Utilities/ImageUp.js");
+const cookieParser = require("cookie-parser");
+
+// use express
 const app = express();
+
+//use cookie parser
+app.use(cookieParser());
 
 // use morgan
 app.use(morgan("tiny"));
 
 // use cors
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+  })
+);
 
 // use body-parser
 app.use(BodyParser.json());
